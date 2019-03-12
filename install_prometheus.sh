@@ -10,7 +10,7 @@ sudo cp -r ./consoles /etc/prometheus
 sudo cp -r ./console_libraries /etc/prometheus
 cd ..
 wget https://raw.github.com/linuxacademy/content-aiops-essentials/master/prometheus.yml
-sudo cp prometheus.yaml /etc/prometheus
+sudo cp prometheus.yml /etc/prometheus
 wget https://raw.github.com/linuxacademy/content-aiops-essentials/master/prometheus.service
 sudo cp prometheus.service /etc/systemd/system
 sudo systemctl daemon-reload
