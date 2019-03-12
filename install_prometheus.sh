@@ -1,3 +1,4 @@
+cd /home/cloud_user
 mkdir -p promwork
 cd promwork
 wget https://github.com/prometheus/prometheus/releases/download/v2.8.0-rc.0/prometheus-2.8.0-rc.0.linux-amd64.tar.gz
