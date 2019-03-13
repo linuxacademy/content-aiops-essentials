@@ -1,4 +1,6 @@
 import requests
+import time
+import sys
 
 # Prometheus api endpoint for query 
 URL = "http://localhost:9090/api/v1/query"
@@ -13,7 +15,7 @@ print("'row','instance','memory','cpu'")
 
 line_no = 1
 
-for seq in range(0 , 10):
+for seq in range(0 , 100):
     rows = []
     row = 0
 
@@ -41,3 +43,5 @@ for seq in range(0 , 10):
         line = line + "," + ro[0] + "," + ro[1] + "," + ro[2]
         print(str(line))
         line_no = line_no + 1
+    sys.stdout.flush()
+    time.sleep(15)
