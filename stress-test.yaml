@@ -5,7 +5,7 @@ metadata:
   labels:
     app: stress
 spec:
-  replicas: 100
+  replicas: 30
   selector:
     matchLabels:
       app: stress
