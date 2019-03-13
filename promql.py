@@ -13,31 +13,52 @@ PROMQL2 = {'query':'100 - avg(irate(node_cpu_seconds_total{job="node",mode="idle
 
 # sending get request and saving the response as response object 
 r1 = requests.get(url = URL, params = PROMQL1)
-memry = r1.json()
 
 r2 = requests.get(url = URL, params = PROMQL2)
-cpu = r2.json()
 
-# Assign results object to results
-results = r1.json()['data']['result']
+r1_json = r1.json()['data']['result']
+r2_json = r2.json()['data']['result']
 
 # Build a list of all labelnames used.
 labelnames = set()
-for result in results:
+for result in r1_json:
       labelnames.update(result['metric'].keys())
 
 # Canonicalize
-#labelnames.discard('__name__')
-#labelnames = sorted(labelnames)
+labelnames.discard('__name__')
+labelnames = sorted(labelnames)
 
 writer = csv.writer(sys.stdout)
 
 # Write the header,
-writer.writerow(['name', 'timestamp', 'value'] + labelnames)
+writer.writerow(['query', 'timestamp', 'value'] + labelnames)
 
 # Write the samples.
-for result in results:
-    l = [result['metric'].get('__name__', '')] + result['value']
+for result in r1_json:
+    l1 = ['memory'] + result['value']
     for label in labelnames:
-        l.append(result['metric'].get(label, ''))
-    writer.writerow(l)
+        l1.append(result['metric'].get(label, ''))
+    writer.writerow(l1)
+
+
+# Build a list of all labelnames used.
+labelnames = set()
+for result in r2_json:
+      labelnames.update(result['metric'].keys())
+
+# Canonicalize
+labelnames.discard('__name__')
+labelnames = sorted(labelnames)
+
+writer = csv.writer(sys.stdout)
+
+# Write the header,
+writer.writerow(['query', 'timestamp', 'value'] + labelnames + ['job'])
+
+# Write the samples.
+for result in r2_json:
+    l2 = ['cpu'] + result['value']
+    for label in labelnames:
+        l2.append(result['metric'].get(label, ''))
+    l2.append('node')
+    writer.writerow(l2)
