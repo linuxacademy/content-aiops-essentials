@@ -11,7 +11,7 @@ PROMQL1 = {'query':'(node_memory_MemTotal_bytes - (node_memory_MemFree_bytes + n
 # CPU Query
 PROMQL2 = {'query':'100 - avg(irate(node_cpu_seconds_total{job="node",mode="idle"}[5m])) by (instance) * 100'}
 
-print("row.instance,memory,cpu")
+print("row,instance,memory,cpu")
 
 line_no = 1
 
