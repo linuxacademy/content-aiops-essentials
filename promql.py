@@ -5,16 +5,17 @@ import sys
 # Prometheus api endpoint for query 
 URL = "http://localhost:9090/api/v1/query"
 
-# Memory query
+# Memory Query
 PROMQL1 = {'query':'(node_memory_MemTotal_bytes - (node_memory_MemFree_bytes + node_memory_Cached_bytes + node_memory_Buffers_bytes)) / node_memory_MemTotal_bytes * 100'}
 
 # CPU Query
 PROMQL2 = {'query':'100 - avg(irate(node_cpu_seconds_total{job="node",mode="idle"}[5m])) by (instance) * 100'}
 
-print("'row','instance','memory','cpu'")
+print("row.instance,memory,cpu")
 
 line_no = 1
 
+#Query every 15 seconds 100 times
 for seq in range(0 , 100):
     rows = []
     row = 0
