@@ -27,5 +27,5 @@ linear_regressor.fit(X_train,y_train)
 
 pred_y = linear_regressor.predict(X2)
 
-df = pd.DataFrame({'Projected Replicas':z2,'CPU Increase (%)':pred_y})
+df = pd.DataFrame({'Projected Replicas':z2,'CPU Needed':pred_y})
 print(df)
