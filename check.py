@@ -1,11 +1,9 @@
 import sklearn
-import tensorflow as tf
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import sys
 
 sys.__stdout__ = sys.stdout
@@ -14,13 +12,6 @@ linear_regressor = LinearRegression()
 
 dataset = pd.read_csv('promql.csv')
 print(dataset.head())
-#print(dataset.describe)
-
-#dataset.plot(x='replicas',y='cpu')
-#plt.title('Replicas vs CPU(%)')
-#plt.xlabel('Replicas')
-#plt.ylabel('CPU(%)')
-#plt.show()
 
 X = dataset[['memory','cpu']]
 y = dataset['replicas']
@@ -40,4 +31,3 @@ print(df)
 print('MAE:',metrics.mean_absolute_error(y_test,pred_y))
 print('MSE:',metrics.mean_squared_error(y_test,pred_y))
 print('RMSE:',np.sqrt(metrics.mean_squared_error(y_test, pred_y)))
-
