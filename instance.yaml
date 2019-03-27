@@ -3,13 +3,13 @@ kind: InstanceGroup
 metadata:
   creationTimestamp: 2019-03-27T18:55:56Z
   labels:
-    kops.k8s.io/cluster: k8s.cmcloudlab1325.info
+    kops.k8s.io/cluster: CLUSTER_NAME
   name: nodes
 spec:
   image: kope.io/k8s-1.10-debian-jessie-amd64-hvm-ebs-2018-08-17
   machineType: t2.medium
-  maxSize: 2
-  minSize: 2
+  maxSize: MAX_SIZE
+  minSize: MIN_SIZE
   nodeLabels:
     kops.k8s.io/instancegroup: nodes
   role: Node
